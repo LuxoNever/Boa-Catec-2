@@ -14,7 +14,7 @@ const destinations = [
         city: 'Santa Cruz',
         country: 'Bolivia',
         description: 'Ciudad tropical con rica cultura y gastronomía',
-        image: '🌴',
+        image: '-',
         icon: Palmtree,
         flights: 15,
         price: 120
@@ -25,7 +25,7 @@ const destinations = [
         city: 'La Paz',
         country: 'Bolivia',
         description: 'La ciudad más alta del mundo',
-        image: '⛰️',
+        image: '-',
         icon: Mountain,
         flights: 12,
         price: 150
@@ -36,7 +36,7 @@ const destinations = [
         city: 'Miami',
         country: 'Estados Unidos',
         description: 'Playas paradisíacas y vida nocturna',
-        image: '🏖️',
+        image: '-',
         icon: Sun,
         flights: 8,
         price: 450
@@ -47,7 +47,7 @@ const destinations = [
         city: 'Madrid',
         country: 'España',
         description: 'Capital europea llena de historia',
-        image: '🏛️',
+        image: '-',
         icon: Building2,
         flights: 5,
         price: 850
@@ -58,7 +58,7 @@ const destinations = [
         city: 'Cochabamba',
         country: 'Bolivia',
         description: 'La ciudad del eterno clima primaveral',
-        image: '🌺',
+        image: '-',
         icon: Sun,
         flights: 18,
         price: 110
@@ -69,7 +69,7 @@ const destinations = [
         city: 'Cusco',
         country: 'Perú',
         description: 'Puerta de entrada a Machu Picchu',
-        image: '🏔️',
+        image: '-',
         icon: Mountain,
         flights: 6,
         price: 180
@@ -93,7 +93,7 @@ export default function DestinosPage() {
     })
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-20">
+        <div className="min-h-screen bg-boa-blue text-white pb-20">
             {/* Hero */}
             <div className="bg-gradient-to-r from-[#0033A0] to-blue-700 text-white py-16 mt-16">
                 <div className="container mx-auto px-4">
@@ -121,7 +121,8 @@ export default function DestinosPage() {
                                             placeholder="Buscar destino..."
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
-                                            className="pl-10"
+                                            style={{ color: '#000000' }}
+                                            className="pl-10 placeholder:text-gray-600 bg-white"
                                         />
                                     </div>
                                 </div>
@@ -129,23 +130,23 @@ export default function DestinosPage() {
                                 {/* Category Filters */}
                                 <div className="flex gap-2">
                                     <Button
-                                        variant={selectedCategory === 'all' ? 'default' : 'outline'}
                                         onClick={() => setSelectedCategory('all')}
-                                        className={selectedCategory === 'all' ? 'bg-[#0033A0] hover:bg-blue-800' : ''}
+                                        style={{ backgroundColor: selectedCategory === 'all' ? '#FFC72C' : 'rgba(255, 199, 44, 0.7)' }}
+                                        className="text-black font-semibold hover:opacity-90 border-0"
                                     >
                                         Todos
                                     </Button>
                                     <Button
-                                        variant={selectedCategory === 'nacional' ? 'default' : 'outline'}
                                         onClick={() => setSelectedCategory('nacional')}
-                                        className={selectedCategory === 'nacional' ? 'bg-[#0033A0] hover:bg-blue-800' : ''}
+                                        style={{ backgroundColor: selectedCategory === 'nacional' ? '#FFC72C' : 'rgba(255, 199, 44, 0.7)' }}
+                                        className="text-black font-semibold hover:opacity-90 border-0"
                                     >
                                         Nacional
                                     </Button>
                                     <Button
-                                        variant={selectedCategory === 'internacional' ? 'default' : 'outline'}
                                         onClick={() => setSelectedCategory('internacional')}
-                                        className={selectedCategory === 'internacional' ? 'bg-[#0033A0] hover:bg-blue-800' : ''}
+                                        style={{ backgroundColor: selectedCategory === 'internacional' ? '#FFC72C' : 'rgba(255, 199, 44, 0.7)' }}
+                                        className="text-black font-semibold hover:opacity-90 border-0"
                                     >
                                         Internacional
                                     </Button>
@@ -155,7 +156,7 @@ export default function DestinosPage() {
                     </Card>
 
                     {/* Results Count */}
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-white-600">
                         Mostrando {filteredDestinations.length} de {destinations.length} destinos
                     </div>
 
@@ -164,38 +165,57 @@ export default function DestinosPage() {
                         {filteredDestinations.map((dest) => {
                             const Icon = dest.icon
                             return (
-                                <Card key={dest.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 group">
-                                    <div className="h-48 bg-gradient-to-br from-[#0033A0] to-blue-600 flex items-center justify-center relative overflow-hidden">
+                                <Card 
+                                    key={dest.id} 
+                                    className="overflow-hidden transition-all duration-300 group"
+                                    style={{ 
+                                        boxShadow: '0 0 5px rgba(252, 235, 0, 0.95), 0 0 10px rgba(255, 199, 44, 0.3)',
+                                        border: '1px solid rgba(189, 186, 12, 0.84)'
+                                    }}
+                                >
+                                    {/* HEADER AMARILLO */}
+                                    <div 
+                                        className="h-48 flex items-center justify-center relative overflow-hidden"
+                                        style={{ background: 'linear-gradient(to bottom right, #FFC72C, #FFD700)' }}
+                                    >
                                         <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
                                         <div className="text-8xl z-10">{dest.image}</div>
+
                                         <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
                                             <span className="font-bold text-[#0033A0]">{dest.code}</span>
                                         </div>
                                     </div>
-                                    <CardContent className="p-6">
+
+                                    {/* CONTENIDO CON AZUL CLARO */}
+                                    <CardContent className="p-6" style={{ backgroundColor: '#150c5cff' }}>
                                         <div className="flex items-start justify-between mb-3">
                                             <div>
-                                                <h3 className="text-2xl font-bold text-gray-900">{dest.city}</h3>
-                                                <p className="text-sm text-gray-600">{dest.country}</p>
+                                                <h3 className="text-2xl font-bold text-white">{dest.city}</h3>
+                                                <p className="text-sm text-gray-300">{dest.country}</p>
                                             </div>
-                                            <Icon className="h-6 w-6 text-[#0033A0]" />
+                                            <Icon className="h-6 w-6 text-[#FFC72C]" />
                                         </div>
 
-                                        <p className="text-sm text-gray-700 mb-4">{dest.description}</p>
+                                        <p className="text-sm text-gray-200 mb-4">{dest.description}</p>
 
                                         <div className="flex items-center justify-between mb-4 text-sm">
-                                            <div className="flex items-center gap-2 text-gray-600">
-                                                <Plane className="h-4 w-4" />
+                                            <div className="flex items-center gap-2 text-gray-300">
+                                                <Plane className="h-4 w-4 text-[#FFC72C]" />
                                                 <span>{dest.flights} vuelos/semana</span>
                                             </div>
                                             <div className="text-right">
-                                                <p className="text-xs text-gray-500">Desde</p>
-                                                <p className="text-2xl font-bold text-[#0033A0]">${dest.price}</p>
+                                                <p className="text-xs text-gray-400">Desde</p>
+                                                <p className="text-2xl font-bold text-[#FFC72C]">${dest.price}</p>
                                             </div>
                                         </div>
 
                                         <Link href={`/vuelos?destino=${dest.code}`}>
-                                            <Button className="w-full bg-[#0033A0] hover:bg-blue-800">
+                                            <Button 
+                                                style={{ backgroundColor: '#FFC72C', color: '#e7e6e6ff' }}
+                                                className="w-full font-semibold transition-all"
+                                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255, 199, 44, 0.7)'}
+                                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFC72C'}
+                                            >
                                                 Ver Vuelos
                                             </Button>
                                         </Link>

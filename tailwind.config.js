@@ -10,7 +10,7 @@ module.exports = {
         extend: {
             colors: {
                 boa: {
-                    blue: '#0033A0',
+                    blue: '#0a1049ff',
                     yellow: '#FFC72C',
                     dark: '#1F2937',
                 },
