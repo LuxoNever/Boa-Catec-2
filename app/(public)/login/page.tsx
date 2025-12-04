@@ -1,20 +1,30 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Plane, ArrowRight, Lock } from 'lucide-react'
+import { Plane, ArrowRight, Lock, AlertCircle } from 'lucide-react'
 
 export default function LoginPage() {
     const router = useRouter()
+    const searchParams = useSearchParams()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
+    const [showAuthMessage, setShowAuthMessage] = useState(false)
+
+    useEffect(() => {
+        // Verificar si viene desde la selección de vuelo
+        const message = searchParams.get('message')
+        if (message === 'auth-required') {
+            setShowAuthMessage(true)
+        }
+    }, [searchParams])
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -55,6 +65,25 @@ export default function LoginPage() {
                         </div>
                         <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Bienvenido de nuevo</h1>
                         <p className="mt-2 text-gray-600">Ingresa a tu cuenta BOA para gestionar tus viajes</p>
+
+                        {/* Mensaje de autenticación requerida */}
+                        {showAuthMessage && (
+                            <div className="mt-6 p-4 rounded-lg bg-blue-50 border-2 border-blue-200 text-blue-800">
+                                <div className="flex items-start">
+                                    <AlertCircle className="h-5 w-5 mr-3 mt-0.5 flex-shrink-0" />
+                                    <div>
+                                        <p className="font-semibold text-sm">Autenticación requerida</p>
+                                        <p className="text-sm mt-1">
+                                            Para continuar con la compra de tu vuelo, debes iniciar sesión o{' '}
+                                            <Link href="/register" className="font-semibold underline hover:text-blue-900">
+                                                crear una cuenta gratis
+                                            </Link>
+                                            .
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     <form onSubmit={handleSubmit} className="mt-8 space-y-6">

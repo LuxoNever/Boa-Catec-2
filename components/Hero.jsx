@@ -1,33 +1,43 @@
+import Image from 'next/image'
 import FlightSearch from './FlightSearch'
+import heroImage from '../src/assets/img/portada.webp'
+import logoBoa from '../src/assets/img/logo-3-boa.png'
 
 export default function Hero() {
     return (
-        <section className="relative min-h-[600px] md:min-h-[700px] flex items-center justify-center gradient-boa-radial overflow-hidden">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                }}></div>
-            </div>
-
-            {/* Cloud animation elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-20 left-10 w-32 h-32 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-20 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <section className="relative min-h-[600px] md:min-h-[700px] flex items-center justify-center overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src={heroImage}
+                    alt="BOA Hero Background"
+                    fill
+                    priority
+                    className="object-cover"
+                    quality={100}
+                />
+                {/* Overlay for better text readability */}
+                <div className="absolute inset-0 bg-black/40" />
             </div>
 
             <div className="relative z-10 w-full section-container">
                 <div className="text-center mb-16">
                     {/* Airplane Icon */}
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-boa-yellow rounded-full mb-6 shadow-2xl">
-                        <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                        </svg>
-                    </div>
+                    {/* Logo */}
+                   
 
                     {/* Hero Title */}
+                    <br />
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in">
-                        Vuela con <span className="text-boa-yellow">BOA</span>
+                        Vuela con <div className="inline-flex items-center justify-center mb-6 animate-fade-in">
+                        <Image
+                            src={logoBoa}
+                            alt="BOA Logo"
+                            width={120}
+                            height={120}
+                            className="object-contain drop-shadow-2xl"
+                        />
+                    </div>
                     </h1>
                     <p className="text-xl md:text-2xl text-blue-100 mb-4 max-w-3xl mx-auto animate-slide-up">
                         Conectando Bolivia con el mundo

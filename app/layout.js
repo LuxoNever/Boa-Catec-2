@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { AuthProvider } from '@/components/providers/AuthProvider'
 import ClientProviders from '@/components/providers/ClientProviders'
+import logo from '@/src/assets/img/logo-1.png'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,16 +10,29 @@ export const metadata = {
     title: 'Boliviana de Aviación (BOA) - Vuelos nacionales e internacionales',
     description: 'Reserva tu vuelo con Boliviana de Aviación. Conectamos Bolivia con el mundo. Vuelos a La Paz, Santa Cruz, Cochabamba, Sucre, Tarija, Trinidad y más destinos.',
     keywords: 'BOA, Boliviana de Aviación, vuelos Bolivia, aerolínea boliviana, reservar vuelos, La Paz, Santa Cruz, Cochabamba',
+    icons: {
+        icon: logo.src,
+        apple: logo.src,
+    },
     openGraph: {
         title: 'Boliviana de Aviación (BOA)',
         description: 'La aerolínea que conecta Bolivia con el mundo',
         type: 'website',
         locale: 'es_BO',
+        images: [
+            {
+                url: logo.src,
+                width: 800,
+                height: 600,
+                alt: 'Boliviana de Aviación Logo',
+            },
+        ],
     },
     twitter: {
         card: 'summary_large_image',
         title: 'Boliviana de Aviación (BOA)',
         description: 'La aerolínea que conecta Bolivia con el mundo',
+        images: [logo.src],
     },
     robots: {
         index: true,
@@ -42,7 +56,7 @@ export default function RootLayout({ children }) {
                             name: 'Boliviana de Aviación',
                             alternateName: 'BOA',
                             url: 'https://www.boa.bo',
-                            logo: 'https://www.boa.bo/logo.png',
+                            logo: logo.src,
                             description: 'Aerolínea boliviana de bandera',
                             address: {
                                 '@type': 'PostalAddress',

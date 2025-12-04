@@ -1,19 +1,19 @@
 import Link from 'next/link'
+import Image from 'next/image'
+import logoBoa from '../src/assets/img/logo-3-boa.png'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="bg-boa-dark text-white mt-auto">
+        <footer className="bg-black-100 text-black mt-auto">
             <div className="section-container">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
                     {/* Company Info */}
                     <div>
                         <div className="flex items-center gap-2 mb-4">
-                            <div className="w-10 h-10 bg-boa-blue rounded-lg flex items-center justify-center">
-                                <span className="text-lg font-bold">BOA</span>
-                            </div>
-                            <div className="font-bold text-lg">Boliviana de Aviación</div>
+                            <Image src={logoBoa} alt="BOA Logo" width={100} height={100} className="object-contain" />
+                            
                         </div>
                         <p className="text-gray-400 text-sm mb-4">
                             La aerolínea nacional de Bolivia, conectando el país con el mundo desde 2009.

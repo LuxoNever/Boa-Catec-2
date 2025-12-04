@@ -65,14 +65,14 @@ export default function VuelosPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-20">
+        <div className="min-h-screen bg-gray-50 pb-20 overflow-x-hidden">
             {/* Hero */}
-            <div className="bg-gradient-to-r from-[#0033A0] to-blue-700 text-white py-16 mt-16">
+            <div className="bg-gradient-to-r from-[#0033A0] to-blue-700 text-white py-16 mt-16 overflow-x-hidden">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto text-center">
                         <Plane className="h-16 w-16 mx-auto mb-4 text-[#FFC72C]" />
-                        <h1 className="text-4xl font-bold mb-4">Buscar Vuelos</h1>
-                        <p className="text-xl text-blue-100">
+                        <h1 className="text-4xl font-black mb-4 text-black">Buscar Vuelos</h1>
+                        <p className="text-xl text-black">
                             Encuentra el vuelo perfecto para tu próximo viaje
                         </p>
                     </div>
@@ -87,7 +87,7 @@ export default function VuelosPage() {
                             <CardTitle className="text-2xl text-[#0033A0]">Busca tu Vuelo</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                            <div className="flex flex-col gap-4 mb-4">
                                 <div>
                                     <label className="block text-sm font-medium text-gray-700 mb-2">
                                         Origen
@@ -158,9 +158,9 @@ export default function VuelosPage() {
                                     {searchResults.map((flight) => (
                                         <Card key={flight.id} className="hover:shadow-lg transition-shadow">
                                             <CardContent className="p-6">
-                                                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                                                <div className="flex flex-col gap-6">
                                                     {/* Flight Info */}
-                                                    <div className="flex-1">
+                                                    <div className="w-full">
                                                         <div className="flex items-center gap-2 mb-4">
                                                             <span className="px-3 py-1 bg-blue-100 text-[#0033A0] rounded-full text-sm font-semibold">
                                                                 {flight.number}
@@ -168,16 +168,16 @@ export default function VuelosPage() {
                                                             <span className="text-sm text-gray-600">{flight.class}</span>
                                                         </div>
 
-                                                        <div className="flex items-center gap-6">
+                                                        <div className="flex items-center gap-4">
                                                             <div className="text-center">
-                                                                <div className="text-3xl font-bold text-gray-900">{flight.from}</div>
-                                                                <div className="text-sm text-gray-600 mt-1">{flight.departure}</div>
+                                                                <div className="text-2xl font-bold text-gray-900">{flight.from}</div>
+                                                                <div className="text-xs text-gray-600 mt-1">{flight.departure}</div>
                                                             </div>
 
                                                             <div className="flex-1 flex flex-col items-center">
                                                                 <div className="flex items-center gap-2 text-gray-600 mb-1">
                                                                     <Clock className="h-4 w-4" />
-                                                                    <span className="text-sm">{flight.duration}</span>
+                                                                    <span className="text-xs">{flight.duration}</span>
                                                                 </div>
                                                                 <div className="w-full h-1 bg-gradient-to-r from-[#0033A0] to-blue-400 rounded relative">
                                                                     <Plane className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-5 w-5 text-[#0033A0] rotate-90 bg-white" />
@@ -185,8 +185,8 @@ export default function VuelosPage() {
                                                             </div>
 
                                                             <div className="text-center">
-                                                                <div className="text-3xl font-bold text-gray-900">{flight.to}</div>
-                                                                <div className="text-sm text-gray-600 mt-1">{flight.arrival}</div>
+                                                                <div className="text-2xl font-bold text-gray-900">{flight.to}</div>
+                                                                <div className="text-xs text-gray-600 mt-1">{flight.arrival}</div>
                                                             </div>
                                                         </div>
 
@@ -196,14 +196,14 @@ export default function VuelosPage() {
                                                     </div>
 
                                                     {/* Price and Action */}
-                                                    <div className="flex flex-col items-end gap-3">
-                                                        <div className="text-right">
+                                                    <div className="flex flex-col items-center gap-3 w-full">
+                                                        <div className="text-center">
                                                             <p className="text-sm text-gray-600">Desde</p>
-                                                            <p className="text-4xl font-bold text-[#0033A0]">${flight.price}</p>
+                                                            <p className="text-3xl font-bold text-[#0033A0]">${flight.price}</p>
                                                             <p className="text-xs text-gray-500">por persona</p>
                                                         </div>
-                                                        <Link href={`/booking-details/${flight.number.toLowerCase()}`}>
-                                                            <Button className="bg-[#0033A0] hover:bg-blue-800">
+                                                        <Link href={`/booking-details/${flight.number.toLowerCase()}`} className="w-full">
+                                                            <Button className="bg-[#0033A0] hover:bg-blue-800 w-full">
                                                                 Seleccionar
                                                                 <ArrowRight className="h-4 w-4 ml-2" />
                                                             </Button>
@@ -248,7 +248,7 @@ export default function VuelosPage() {
                                 <CardTitle className="text-xl text-[#0033A0]">Rutas Populares</CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div className="flex flex-col gap-4">
                                     {[
                                         { from: 'MIA', to: 'VVI', price: 450 },
                                         { from: 'LPB', to: 'VVI', price: 120 },

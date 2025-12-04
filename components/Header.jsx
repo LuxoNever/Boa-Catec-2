@@ -6,8 +6,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useSession, signOut } from 'next-auth/react'
 import { User, LogOut, LayoutDashboard, Plane } from 'lucide-react'
 
+import Image from 'next/image'
+import logoBoa from '../src/assets/img/logo-3-boa.png'
+import LoginModal from './LoginModal'
+import RegisterModal from './RegisterModal'
+
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [loginModalOpen, setLoginModalOpen] = useState(false)
+    const [registerModalOpen, setRegisterModalOpen] = useState(false)
     const { data: session, status } = useSession()
 
     const navigation = [
@@ -25,13 +32,7 @@ export default function Header() {
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
-                        <div className="w-12 h-12 bg-boa-blue rounded-lg flex items-center justify-center">
-                            <span className="text-2xl font-bold text-white">BOA</span>
-                        </div>
-                        <div className="hidden sm:block">
-                            <div className="text-boa-blue font-bold text-xl">Boliviana de Aviación</div>
-                            <div className="text-xs text-gray-600">Conectando Bolivia con el mundo</div>
-                        </div>
+                        <Image src={logoBoa} alt="BOA Logo" width={100} height={100} className="object-contain" />
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -71,9 +72,20 @@ export default function Header() {
                                 </div>
                             </div>
                         ) : (
-                            <Link href="/login" className="ml-4 btn-primary">
-                                Iniciar Sesión
-                            </Link>
+                            <div className="flex items-center gap-4">
+                                <button
+                                    onClick={() => setLoginModalOpen(true)}
+                                    className="btn-primary"
+                                >
+                                    Iniciar Sesión
+                                </button>
+                                <button
+                                    onClick={() => setRegisterModalOpen(true)}
+                                    className="btn-secondary"
+                                >
+                                    Regístrate
+                                </button>
+                            </div>
                         )}
                     </div>
 
@@ -139,18 +151,48 @@ export default function Header() {
                                         </button>
                                     </>
                                 ) : (
-                                    <Link
-                                        href="/login"
-                                        className="block w-full mt-4 text-center btn-primary"
-                                        onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                        Iniciar Sesión
-                                    </Link>
+                                    <>
+                                        <button
+                                            onClick={() => {
+                                                setMobileMenuOpen(false)
+                                                setLoginModalOpen(true)
+                                            }}
+                                            className="block w-full mt-4 text-center btn-primary"
+                                        >
+                                            Iniciar Sesión
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setMobileMenuOpen(false)
+                                                setRegisterModalOpen(true)
+                                            }}
+                                            className="block w-full mt-4 text-center btn-secondary"
+                                        >
+                                            Regístrate
+                                        </button>
+                                    </>
                                 )}
                             </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
+
+                <LoginModal
+                    isOpen={loginModalOpen}
+                    onClose={() => setLoginModalOpen(false)}
+                    onSwitchToRegister={() => {
+                        setLoginModalOpen(false)
+                        setRegisterModalOpen(true)
+                    }}
+                />
+                <RegisterModal
+                    isOpen={registerModalOpen}
+                    onClose={() => setRegisterModalOpen(false)}
+                    onSwitchToLogin={() => {
+                        setRegisterModalOpen(false)
+                        setLoginModalOpen(true)
+                    }}
+                />
             </nav>
         </header>
     )
